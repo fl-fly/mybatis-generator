@@ -1,0 +1,2008 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fl.mapper.SecurityMapper">
+  <resultMap id="BaseResultMap" type="com.fl.model.Security">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <result column="VC_CODE" jdbcType="VARCHAR" property="vcCode" />
+    <result column="VC_SNAME" jdbcType="VARCHAR" property="vcSname" />
+    <result column="VC_NAME" jdbcType="VARCHAR" property="vcName" />
+    <result column="VC_SPELL_ABBR" jdbcType="VARCHAR" property="vcSpellAbbr" />
+    <result column="VC_ISIN" jdbcType="VARCHAR" property="vcIsin" />
+    <result column="L_CURRENCY" jdbcType="NUMERIC" property="lCurrency" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="VC_COMPANY_CODE" jdbcType="VARCHAR" property="vcCompanyCode" />
+    <result column="L_KIND" jdbcType="NUMERIC" property="lKind" />
+    <result column="L_OFFER_DATE" jdbcType="NUMERIC" property="lOfferDate" />
+    <result column="L_LIST_DATE" jdbcType="NUMERIC" property="lListDate" />
+    <result column="L_CANCEL_DATE" jdbcType="NUMERIC" property="lCancelDate" />
+    <result column="C_VALID_FLAG" jdbcType="CHAR" property="cValidFlag" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="VARCHAR" property="lSourceId" />
+    <result column="VC_MODIFIER" jdbcType="VARCHAR" property="vcModifier" />
+    <result column="C_MODI_FLAG" jdbcType="CHAR" property="cModiFlag" />
+    <result column="VC_LINK_SCODE" jdbcType="VARCHAR" property="vcLinkScode" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_LISTEDSECTOR" jdbcType="NUMERIC" property="lListedsector" />
+    <result column="VC_INNERCODE" jdbcType="VARCHAR" property="vcInnercode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, VC_CODE, VC_SNAME, VC_NAME, VC_SPELL_ABBR, VC_ISIN, L_CURRENCY, L_MARKET, 
+    VC_COMPANY_CODE, L_KIND, L_OFFER_DATE, L_LIST_DATE, L_CANCEL_DATE, C_VALID_FLAG, 
+    D_UPDATETIME, VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, VC_MODIFIER, C_MODI_FLAG, 
+    VC_LINK_SCODE, SRCID, L_LISTEDSECTOR, VC_INNERCODE
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.SecurityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.SecurityExample">
+    delete from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY (VC_SCODE, VC_CODE, VC_SNAME, 
+      VC_NAME, VC_SPELL_ABBR, VC_ISIN, 
+      L_CURRENCY, L_MARKET, VC_COMPANY_CODE, 
+      L_KIND, L_OFFER_DATE, L_LIST_DATE, 
+      L_CANCEL_DATE, C_VALID_FLAG, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      VC_MODIFIER, C_MODI_FLAG, VC_LINK_SCODE, 
+      SRCID, L_LISTEDSECTOR, VC_INNERCODE
+      )
+    values (#{vcScode,jdbcType=VARCHAR}, #{vcCode,jdbcType=VARCHAR}, #{vcSname,jdbcType=VARCHAR}, 
+      #{vcName,jdbcType=VARCHAR}, #{vcSpellAbbr,jdbcType=VARCHAR}, #{vcIsin,jdbcType=VARCHAR}, 
+      #{lCurrency,jdbcType=NUMERIC}, #{lMarket,jdbcType=NUMERIC}, #{vcCompanyCode,jdbcType=VARCHAR}, 
+      #{lKind,jdbcType=NUMERIC}, #{lOfferDate,jdbcType=NUMERIC}, #{lListDate,jdbcType=NUMERIC}, 
+      #{lCancelDate,jdbcType=NUMERIC}, #{cValidFlag,jdbcType=CHAR}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=VARCHAR}, 
+      #{vcModifier,jdbcType=VARCHAR}, #{cModiFlag,jdbcType=CHAR}, #{vcLinkScode,jdbcType=VARCHAR}, 
+      #{srcid,jdbcType=VARCHAR}, #{lListedsector,jdbcType=NUMERIC}, #{vcInnercode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="vcCode != null">
+        VC_CODE,
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME,
+      </if>
+      <if test="vcName != null">
+        VC_NAME,
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR,
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN,
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE,
+      </if>
+      <if test="lKind != null">
+        L_KIND,
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE,
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE,
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE,
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER,
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG,
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lListedsector != null">
+        L_LISTEDSECTOR,
+      </if>
+      <if test="vcInnercode != null">
+        VC_INNERCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcCode != null">
+        #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lListedsector != null">
+        #{lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="vcInnercode != null">
+        #{vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.SecurityExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcCode != null">
+        VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSname != null">
+        VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcName != null">
+        VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcIsin != null">
+        VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lCurrency != null">
+        L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcCompanyCode != null">
+        VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lKind != null">
+        L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lOfferDate != null">
+        L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lListDate != null">
+        L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lCancelDate != null">
+        L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cValidFlag != null">
+        C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcModifier != null">
+        VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cModiFlag != null">
+        C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.vcLinkScode != null">
+        VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lListedsector != null">
+        L_LISTEDSECTOR = #{record.lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcInnercode != null">
+        VC_INNERCODE = #{record.vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_SECURITY
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_LISTEDSECTOR = #{record.lListedsector,jdbcType=NUMERIC},
+      VC_INNERCODE = #{record.vcInnercode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="vcCode != null">
+        VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        VC_NAME = #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        L_KIND = #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lListedsector != null">
+        L_LISTEDSECTOR = #{lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="vcInnercode != null">
+        VC_INNERCODE = #{vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    set VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_LISTEDSECTOR = #{lListedsector,jdbcType=NUMERIC},
+      VC_INNERCODE = #{vcInnercode,jdbcType=VARCHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.Security">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <result column="VC_CODE" jdbcType="VARCHAR" property="vcCode" />
+    <result column="VC_SNAME" jdbcType="VARCHAR" property="vcSname" />
+    <result column="VC_NAME" jdbcType="VARCHAR" property="vcName" />
+    <result column="VC_SPELL_ABBR" jdbcType="VARCHAR" property="vcSpellAbbr" />
+    <result column="VC_ISIN" jdbcType="VARCHAR" property="vcIsin" />
+    <result column="L_CURRENCY" jdbcType="NUMERIC" property="lCurrency" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="VC_COMPANY_CODE" jdbcType="VARCHAR" property="vcCompanyCode" />
+    <result column="L_KIND" jdbcType="NUMERIC" property="lKind" />
+    <result column="L_OFFER_DATE" jdbcType="NUMERIC" property="lOfferDate" />
+    <result column="L_LIST_DATE" jdbcType="NUMERIC" property="lListDate" />
+    <result column="L_CANCEL_DATE" jdbcType="NUMERIC" property="lCancelDate" />
+    <result column="C_VALID_FLAG" jdbcType="CHAR" property="cValidFlag" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="VARCHAR" property="lSourceId" />
+    <result column="VC_MODIFIER" jdbcType="VARCHAR" property="vcModifier" />
+    <result column="C_MODI_FLAG" jdbcType="CHAR" property="cModiFlag" />
+    <result column="VC_LINK_SCODE" jdbcType="VARCHAR" property="vcLinkScode" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_LISTEDSECTOR" jdbcType="NUMERIC" property="lListedsector" />
+    <result column="VC_INNERCODE" jdbcType="VARCHAR" property="vcInnercode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, VC_CODE, VC_SNAME, VC_NAME, VC_SPELL_ABBR, VC_ISIN, L_CURRENCY, L_MARKET, 
+    VC_COMPANY_CODE, L_KIND, L_OFFER_DATE, L_LIST_DATE, L_CANCEL_DATE, C_VALID_FLAG, 
+    D_UPDATETIME, VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, VC_MODIFIER, C_MODI_FLAG, 
+    VC_LINK_SCODE, SRCID, L_LISTEDSECTOR, VC_INNERCODE
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.SecurityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.SecurityExample">
+    delete from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY (VC_SCODE, VC_CODE, VC_SNAME, 
+      VC_NAME, VC_SPELL_ABBR, VC_ISIN, 
+      L_CURRENCY, L_MARKET, VC_COMPANY_CODE, 
+      L_KIND, L_OFFER_DATE, L_LIST_DATE, 
+      L_CANCEL_DATE, C_VALID_FLAG, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      VC_MODIFIER, C_MODI_FLAG, VC_LINK_SCODE, 
+      SRCID, L_LISTEDSECTOR, VC_INNERCODE
+      )
+    values (#{vcScode,jdbcType=VARCHAR}, #{vcCode,jdbcType=VARCHAR}, #{vcSname,jdbcType=VARCHAR}, 
+      #{vcName,jdbcType=VARCHAR}, #{vcSpellAbbr,jdbcType=VARCHAR}, #{vcIsin,jdbcType=VARCHAR}, 
+      #{lCurrency,jdbcType=NUMERIC}, #{lMarket,jdbcType=NUMERIC}, #{vcCompanyCode,jdbcType=VARCHAR}, 
+      #{lKind,jdbcType=NUMERIC}, #{lOfferDate,jdbcType=NUMERIC}, #{lListDate,jdbcType=NUMERIC}, 
+      #{lCancelDate,jdbcType=NUMERIC}, #{cValidFlag,jdbcType=CHAR}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=VARCHAR}, 
+      #{vcModifier,jdbcType=VARCHAR}, #{cModiFlag,jdbcType=CHAR}, #{vcLinkScode,jdbcType=VARCHAR}, 
+      #{srcid,jdbcType=VARCHAR}, #{lListedsector,jdbcType=NUMERIC}, #{vcInnercode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="vcCode != null">
+        VC_CODE,
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME,
+      </if>
+      <if test="vcName != null">
+        VC_NAME,
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR,
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN,
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE,
+      </if>
+      <if test="lKind != null">
+        L_KIND,
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE,
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE,
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE,
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER,
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG,
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lListedsector != null">
+        L_LISTEDSECTOR,
+      </if>
+      <if test="vcInnercode != null">
+        VC_INNERCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcCode != null">
+        #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lListedsector != null">
+        #{lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="vcInnercode != null">
+        #{vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.SecurityExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcCode != null">
+        VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSname != null">
+        VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcName != null">
+        VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcIsin != null">
+        VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lCurrency != null">
+        L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcCompanyCode != null">
+        VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lKind != null">
+        L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lOfferDate != null">
+        L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lListDate != null">
+        L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lCancelDate != null">
+        L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cValidFlag != null">
+        C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcModifier != null">
+        VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cModiFlag != null">
+        C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.vcLinkScode != null">
+        VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lListedsector != null">
+        L_LISTEDSECTOR = #{record.lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcInnercode != null">
+        VC_INNERCODE = #{record.vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_SECURITY
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_LISTEDSECTOR = #{record.lListedsector,jdbcType=NUMERIC},
+      VC_INNERCODE = #{record.vcInnercode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="vcCode != null">
+        VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        VC_NAME = #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        L_KIND = #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lListedsector != null">
+        L_LISTEDSECTOR = #{lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="vcInnercode != null">
+        VC_INNERCODE = #{vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    set VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_LISTEDSECTOR = #{lListedsector,jdbcType=NUMERIC},
+      VC_INNERCODE = #{vcInnercode,jdbcType=VARCHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.Security">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <result column="VC_CODE" jdbcType="VARCHAR" property="vcCode" />
+    <result column="VC_SNAME" jdbcType="VARCHAR" property="vcSname" />
+    <result column="VC_NAME" jdbcType="VARCHAR" property="vcName" />
+    <result column="VC_SPELL_ABBR" jdbcType="VARCHAR" property="vcSpellAbbr" />
+    <result column="VC_ISIN" jdbcType="VARCHAR" property="vcIsin" />
+    <result column="L_CURRENCY" jdbcType="NUMERIC" property="lCurrency" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="VC_COMPANY_CODE" jdbcType="VARCHAR" property="vcCompanyCode" />
+    <result column="L_KIND" jdbcType="NUMERIC" property="lKind" />
+    <result column="L_OFFER_DATE" jdbcType="NUMERIC" property="lOfferDate" />
+    <result column="L_LIST_DATE" jdbcType="NUMERIC" property="lListDate" />
+    <result column="L_CANCEL_DATE" jdbcType="NUMERIC" property="lCancelDate" />
+    <result column="C_VALID_FLAG" jdbcType="CHAR" property="cValidFlag" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="VARCHAR" property="lSourceId" />
+    <result column="VC_MODIFIER" jdbcType="VARCHAR" property="vcModifier" />
+    <result column="C_MODI_FLAG" jdbcType="CHAR" property="cModiFlag" />
+    <result column="VC_LINK_SCODE" jdbcType="VARCHAR" property="vcLinkScode" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_LISTEDSECTOR" jdbcType="NUMERIC" property="lListedsector" />
+    <result column="VC_INNERCODE" jdbcType="VARCHAR" property="vcInnercode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, VC_CODE, VC_SNAME, VC_NAME, VC_SPELL_ABBR, VC_ISIN, L_CURRENCY, L_MARKET, 
+    VC_COMPANY_CODE, L_KIND, L_OFFER_DATE, L_LIST_DATE, L_CANCEL_DATE, C_VALID_FLAG, 
+    D_UPDATETIME, VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, VC_MODIFIER, C_MODI_FLAG, 
+    VC_LINK_SCODE, SRCID, L_LISTEDSECTOR, VC_INNERCODE
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.SecurityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.SecurityExample">
+    delete from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY (VC_SCODE, VC_CODE, VC_SNAME, 
+      VC_NAME, VC_SPELL_ABBR, VC_ISIN, 
+      L_CURRENCY, L_MARKET, VC_COMPANY_CODE, 
+      L_KIND, L_OFFER_DATE, L_LIST_DATE, 
+      L_CANCEL_DATE, C_VALID_FLAG, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      VC_MODIFIER, C_MODI_FLAG, VC_LINK_SCODE, 
+      SRCID, L_LISTEDSECTOR, VC_INNERCODE
+      )
+    values (#{vcScode,jdbcType=VARCHAR}, #{vcCode,jdbcType=VARCHAR}, #{vcSname,jdbcType=VARCHAR}, 
+      #{vcName,jdbcType=VARCHAR}, #{vcSpellAbbr,jdbcType=VARCHAR}, #{vcIsin,jdbcType=VARCHAR}, 
+      #{lCurrency,jdbcType=NUMERIC}, #{lMarket,jdbcType=NUMERIC}, #{vcCompanyCode,jdbcType=VARCHAR}, 
+      #{lKind,jdbcType=NUMERIC}, #{lOfferDate,jdbcType=NUMERIC}, #{lListDate,jdbcType=NUMERIC}, 
+      #{lCancelDate,jdbcType=NUMERIC}, #{cValidFlag,jdbcType=CHAR}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=VARCHAR}, 
+      #{vcModifier,jdbcType=VARCHAR}, #{cModiFlag,jdbcType=CHAR}, #{vcLinkScode,jdbcType=VARCHAR}, 
+      #{srcid,jdbcType=VARCHAR}, #{lListedsector,jdbcType=NUMERIC}, #{vcInnercode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="vcCode != null">
+        VC_CODE,
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME,
+      </if>
+      <if test="vcName != null">
+        VC_NAME,
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR,
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN,
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE,
+      </if>
+      <if test="lKind != null">
+        L_KIND,
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE,
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE,
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE,
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER,
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG,
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lListedsector != null">
+        L_LISTEDSECTOR,
+      </if>
+      <if test="vcInnercode != null">
+        VC_INNERCODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcCode != null">
+        #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lListedsector != null">
+        #{lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="vcInnercode != null">
+        #{vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.SecurityExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcCode != null">
+        VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSname != null">
+        VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcName != null">
+        VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcIsin != null">
+        VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lCurrency != null">
+        L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcCompanyCode != null">
+        VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lKind != null">
+        L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lOfferDate != null">
+        L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lListDate != null">
+        L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lCancelDate != null">
+        L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cValidFlag != null">
+        C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcModifier != null">
+        VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cModiFlag != null">
+        C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.vcLinkScode != null">
+        VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lListedsector != null">
+        L_LISTEDSECTOR = #{record.lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcInnercode != null">
+        VC_INNERCODE = #{record.vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_SECURITY
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_LISTEDSECTOR = #{record.lListedsector,jdbcType=NUMERIC},
+      VC_INNERCODE = #{record.vcInnercode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="vcCode != null">
+        VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        VC_NAME = #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        L_KIND = #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lListedsector != null">
+        L_LISTEDSECTOR = #{lListedsector,jdbcType=NUMERIC},
+      </if>
+      <if test="vcInnercode != null">
+        VC_INNERCODE = #{vcInnercode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    set VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_LISTEDSECTOR = #{lListedsector,jdbcType=NUMERIC},
+      VC_INNERCODE = #{vcInnercode,jdbcType=VARCHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.Security">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <result column="VC_CODE" jdbcType="VARCHAR" property="vcCode" />
+    <result column="VC_SNAME" jdbcType="VARCHAR" property="vcSname" />
+    <result column="VC_NAME" jdbcType="VARCHAR" property="vcName" />
+    <result column="VC_SPELL_ABBR" jdbcType="VARCHAR" property="vcSpellAbbr" />
+    <result column="VC_ISIN" jdbcType="VARCHAR" property="vcIsin" />
+    <result column="L_CURRENCY" jdbcType="NUMERIC" property="lCurrency" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="VC_COMPANY_CODE" jdbcType="VARCHAR" property="vcCompanyCode" />
+    <result column="L_KIND" jdbcType="NUMERIC" property="lKind" />
+    <result column="L_OFFER_DATE" jdbcType="NUMERIC" property="lOfferDate" />
+    <result column="L_LIST_DATE" jdbcType="NUMERIC" property="lListDate" />
+    <result column="L_CANCEL_DATE" jdbcType="NUMERIC" property="lCancelDate" />
+    <result column="C_VALID_FLAG" jdbcType="CHAR" property="cValidFlag" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="VARCHAR" property="lSourceId" />
+    <result column="VC_MODIFIER" jdbcType="VARCHAR" property="vcModifier" />
+    <result column="C_MODI_FLAG" jdbcType="CHAR" property="cModiFlag" />
+    <result column="VC_LINK_SCODE" jdbcType="VARCHAR" property="vcLinkScode" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, VC_CODE, VC_SNAME, VC_NAME, VC_SPELL_ABBR, VC_ISIN, L_CURRENCY, L_MARKET, 
+    VC_COMPANY_CODE, L_KIND, L_OFFER_DATE, L_LIST_DATE, L_CANCEL_DATE, C_VALID_FLAG, 
+    D_UPDATETIME, VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, VC_MODIFIER, C_MODI_FLAG, 
+    VC_LINK_SCODE, SRCID
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.SecurityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DM_BSC_SECURITY
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.SecurityExample">
+    delete from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY (VC_SCODE, VC_CODE, VC_SNAME, 
+      VC_NAME, VC_SPELL_ABBR, VC_ISIN, 
+      L_CURRENCY, L_MARKET, VC_COMPANY_CODE, 
+      L_KIND, L_OFFER_DATE, L_LIST_DATE, 
+      L_CANCEL_DATE, C_VALID_FLAG, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      VC_MODIFIER, C_MODI_FLAG, VC_LINK_SCODE, 
+      SRCID)
+    values (#{vcScode,jdbcType=VARCHAR}, #{vcCode,jdbcType=VARCHAR}, #{vcSname,jdbcType=VARCHAR}, 
+      #{vcName,jdbcType=VARCHAR}, #{vcSpellAbbr,jdbcType=VARCHAR}, #{vcIsin,jdbcType=VARCHAR}, 
+      #{lCurrency,jdbcType=NUMERIC}, #{lMarket,jdbcType=NUMERIC}, #{vcCompanyCode,jdbcType=VARCHAR}, 
+      #{lKind,jdbcType=NUMERIC}, #{lOfferDate,jdbcType=NUMERIC}, #{lListDate,jdbcType=NUMERIC}, 
+      #{lCancelDate,jdbcType=NUMERIC}, #{cValidFlag,jdbcType=CHAR}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=VARCHAR}, 
+      #{vcModifier,jdbcType=VARCHAR}, #{cModiFlag,jdbcType=CHAR}, #{vcLinkScode,jdbcType=VARCHAR}, 
+      #{srcid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.Security">
+    insert into DM_BSC_SECURITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="vcCode != null">
+        VC_CODE,
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME,
+      </if>
+      <if test="vcName != null">
+        VC_NAME,
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR,
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN,
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE,
+      </if>
+      <if test="lKind != null">
+        L_KIND,
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE,
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE,
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE,
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER,
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG,
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcCode != null">
+        #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.SecurityExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_SECURITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcCode != null">
+        VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSname != null">
+        VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcName != null">
+        VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcIsin != null">
+        VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lCurrency != null">
+        L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcCompanyCode != null">
+        VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lKind != null">
+        L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lOfferDate != null">
+        L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lListDate != null">
+        L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lCancelDate != null">
+        L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cValidFlag != null">
+        C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcModifier != null">
+        VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cModiFlag != null">
+        C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.vcLinkScode != null">
+        VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_SECURITY
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      VC_CODE = #{record.vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{record.vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{record.vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{record.vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{record.vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{record.lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{record.vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{record.lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{record.lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{record.lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{record.lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{record.cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{record.vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{record.cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{record.vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{record.srcid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    <set>
+      <if test="vcCode != null">
+        VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSname != null">
+        VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      </if>
+      <if test="vcName != null">
+        VC_NAME = #{vcName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcSpellAbbr != null">
+        VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="vcIsin != null">
+        VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      </if>
+      <if test="lCurrency != null">
+        L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="vcCompanyCode != null">
+        VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lKind != null">
+        L_KIND = #{lKind,jdbcType=NUMERIC},
+      </if>
+      <if test="lOfferDate != null">
+        L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lListDate != null">
+        L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      </if>
+      <if test="lCancelDate != null">
+        L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cValidFlag != null">
+        C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcModifier != null">
+        VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      </if>
+      <if test="cModiFlag != null">
+        C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      </if>
+      <if test="vcLinkScode != null">
+        VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.Security">
+    update DM_BSC_SECURITY
+    set VC_CODE = #{vcCode,jdbcType=VARCHAR},
+      VC_SNAME = #{vcSname,jdbcType=VARCHAR},
+      VC_NAME = #{vcName,jdbcType=VARCHAR},
+      VC_SPELL_ABBR = #{vcSpellAbbr,jdbcType=VARCHAR},
+      VC_ISIN = #{vcIsin,jdbcType=VARCHAR},
+      L_CURRENCY = #{lCurrency,jdbcType=NUMERIC},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      VC_COMPANY_CODE = #{vcCompanyCode,jdbcType=VARCHAR},
+      L_KIND = #{lKind,jdbcType=NUMERIC},
+      L_OFFER_DATE = #{lOfferDate,jdbcType=NUMERIC},
+      L_LIST_DATE = #{lListDate,jdbcType=NUMERIC},
+      L_CANCEL_DATE = #{lCancelDate,jdbcType=NUMERIC},
+      C_VALID_FLAG = #{cValidFlag,jdbcType=CHAR},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=VARCHAR},
+      VC_MODIFIER = #{vcModifier,jdbcType=VARCHAR},
+      C_MODI_FLAG = #{cModiFlag,jdbcType=CHAR},
+      VC_LINK_SCODE = #{vcLinkScode,jdbcType=VARCHAR},
+      SRCID = #{srcid,jdbcType=VARCHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+  </update>
+</mapper>

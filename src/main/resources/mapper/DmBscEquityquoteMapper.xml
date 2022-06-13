@@ -1,0 +1,2608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fl.mapper.DmBscEquityquoteMapper">
+  <resultMap id="BaseResultMap" type="com.fl.model.DmBscEquityquote">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <id column="L_TRADE_DATE" jdbcType="NUMERIC" property="lTradeDate" />
+    <result column="VC_STOCK_CODE" jdbcType="VARCHAR" property="vcStockCode" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="EN_LAST_PRICE" jdbcType="NUMERIC" property="enLastPrice" />
+    <result column="EN_OPEN_PRICE" jdbcType="NUMERIC" property="enOpenPrice" />
+    <result column="EN_HIGH_PRICE" jdbcType="NUMERIC" property="enHighPrice" />
+    <result column="EN_LOW_PRICE" jdbcType="NUMERIC" property="enLowPrice" />
+    <result column="EN_CLOSE_PRICE" jdbcType="NUMERIC" property="enClosePrice" />
+    <result column="EN_AMOUNT" jdbcType="NUMERIC" property="enAmount" />
+    <result column="EN_VOLUME" jdbcType="NUMERIC" property="enVolume" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="NUMERIC" property="lSourceId" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_PRICE_CHANGE" jdbcType="NUMERIC" property="lPriceChange" />
+    <result column="EN_PLMT" jdbcType="NUMERIC" property="enPlmt" />
+    <result column="L_QUOTE_DATE" jdbcType="NUMERIC" property="lQuoteDate" />
+    <result column="C_IS_FILL" jdbcType="CHAR" property="cIsFill" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, EN_HIGH_PRICE, 
+    EN_LOW_PRICE, EN_CLOSE_PRICE, EN_AMOUNT, EN_VOLUME, D_UPDATETIME, VC_DATA_SOURCE, 
+    D_SRC_UPDATETIME, L_SOURCE_ID, SRCID, L_PRICE_CHANGE, EN_PLMT, L_QUOTE_DATE, C_IS_FILL
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey">
+    delete from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.DmBscEquityquoteExample">
+    delete from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE (VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, 
+      L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, 
+      EN_HIGH_PRICE, EN_LOW_PRICE, EN_CLOSE_PRICE, 
+      EN_AMOUNT, EN_VOLUME, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      SRCID, L_PRICE_CHANGE, EN_PLMT, 
+      L_QUOTE_DATE, C_IS_FILL)
+    values (#{vcScode,jdbcType=VARCHAR}, #{lTradeDate,jdbcType=NUMERIC}, #{vcStockCode,jdbcType=VARCHAR}, 
+      #{lMarket,jdbcType=NUMERIC}, #{enLastPrice,jdbcType=NUMERIC}, #{enOpenPrice,jdbcType=NUMERIC}, 
+      #{enHighPrice,jdbcType=NUMERIC}, #{enLowPrice,jdbcType=NUMERIC}, #{enClosePrice,jdbcType=NUMERIC}, 
+      #{enAmount,jdbcType=NUMERIC}, #{enVolume,jdbcType=NUMERIC}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=NUMERIC}, 
+      #{srcid,jdbcType=VARCHAR}, #{lPriceChange,jdbcType=NUMERIC}, #{enPlmt,jdbcType=NUMERIC}, 
+      #{lQuoteDate,jdbcType=NUMERIC}, #{cIsFill,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="lTradeDate != null">
+        L_TRADE_DATE,
+      </if>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE,
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE,
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE,
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE,
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE,
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT,
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE,
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT,
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE,
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="lTradeDate != null">
+        #{lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="vcStockCode != null">
+        #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        #{cIsFill,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lTradeDate != null">
+        L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcStockCode != null">
+        VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLastPrice != null">
+        EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enOpenPrice != null">
+        EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enHighPrice != null">
+        EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLowPrice != null">
+        EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enClosePrice != null">
+        EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enAmount != null">
+        EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enVolume != null">
+        EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPriceChange != null">
+        L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enPlmt != null">
+        EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lQuoteDate != null">
+        L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cIsFill != null">
+        C_IS_FILL = #{record.cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{record.cIsFill,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL = #{cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    set VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{cIsFill,jdbcType=CHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.DmBscEquityquote">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <id column="L_TRADE_DATE" jdbcType="NUMERIC" property="lTradeDate" />
+    <result column="VC_STOCK_CODE" jdbcType="VARCHAR" property="vcStockCode" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="EN_LAST_PRICE" jdbcType="NUMERIC" property="enLastPrice" />
+    <result column="EN_OPEN_PRICE" jdbcType="NUMERIC" property="enOpenPrice" />
+    <result column="EN_HIGH_PRICE" jdbcType="NUMERIC" property="enHighPrice" />
+    <result column="EN_LOW_PRICE" jdbcType="NUMERIC" property="enLowPrice" />
+    <result column="EN_CLOSE_PRICE" jdbcType="NUMERIC" property="enClosePrice" />
+    <result column="EN_AMOUNT" jdbcType="NUMERIC" property="enAmount" />
+    <result column="EN_VOLUME" jdbcType="NUMERIC" property="enVolume" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="NUMERIC" property="lSourceId" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_PRICE_CHANGE" jdbcType="NUMERIC" property="lPriceChange" />
+    <result column="EN_PLMT" jdbcType="NUMERIC" property="enPlmt" />
+    <result column="L_QUOTE_DATE" jdbcType="NUMERIC" property="lQuoteDate" />
+    <result column="C_IS_FILL" jdbcType="CHAR" property="cIsFill" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, EN_HIGH_PRICE, 
+    EN_LOW_PRICE, EN_CLOSE_PRICE, EN_AMOUNT, EN_VOLUME, D_UPDATETIME, VC_DATA_SOURCE, 
+    D_SRC_UPDATETIME, L_SOURCE_ID, SRCID, L_PRICE_CHANGE, EN_PLMT, L_QUOTE_DATE, C_IS_FILL
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey">
+    delete from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.DmBscEquityquoteExample">
+    delete from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE (VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, 
+      L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, 
+      EN_HIGH_PRICE, EN_LOW_PRICE, EN_CLOSE_PRICE, 
+      EN_AMOUNT, EN_VOLUME, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      SRCID, L_PRICE_CHANGE, EN_PLMT, 
+      L_QUOTE_DATE, C_IS_FILL)
+    values (#{vcScode,jdbcType=VARCHAR}, #{lTradeDate,jdbcType=NUMERIC}, #{vcStockCode,jdbcType=VARCHAR}, 
+      #{lMarket,jdbcType=NUMERIC}, #{enLastPrice,jdbcType=NUMERIC}, #{enOpenPrice,jdbcType=NUMERIC}, 
+      #{enHighPrice,jdbcType=NUMERIC}, #{enLowPrice,jdbcType=NUMERIC}, #{enClosePrice,jdbcType=NUMERIC}, 
+      #{enAmount,jdbcType=NUMERIC}, #{enVolume,jdbcType=NUMERIC}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=NUMERIC}, 
+      #{srcid,jdbcType=VARCHAR}, #{lPriceChange,jdbcType=NUMERIC}, #{enPlmt,jdbcType=NUMERIC}, 
+      #{lQuoteDate,jdbcType=NUMERIC}, #{cIsFill,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="lTradeDate != null">
+        L_TRADE_DATE,
+      </if>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE,
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE,
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE,
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE,
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE,
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT,
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE,
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT,
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE,
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="lTradeDate != null">
+        #{lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="vcStockCode != null">
+        #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        #{cIsFill,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lTradeDate != null">
+        L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcStockCode != null">
+        VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLastPrice != null">
+        EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enOpenPrice != null">
+        EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enHighPrice != null">
+        EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLowPrice != null">
+        EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enClosePrice != null">
+        EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enAmount != null">
+        EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enVolume != null">
+        EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPriceChange != null">
+        L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enPlmt != null">
+        EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lQuoteDate != null">
+        L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cIsFill != null">
+        C_IS_FILL = #{record.cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{record.cIsFill,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL = #{cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    set VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{cIsFill,jdbcType=CHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.DmBscEquityquote">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <id column="L_TRADE_DATE" jdbcType="NUMERIC" property="lTradeDate" />
+    <result column="VC_STOCK_CODE" jdbcType="VARCHAR" property="vcStockCode" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="EN_LAST_PRICE" jdbcType="NUMERIC" property="enLastPrice" />
+    <result column="EN_OPEN_PRICE" jdbcType="NUMERIC" property="enOpenPrice" />
+    <result column="EN_HIGH_PRICE" jdbcType="NUMERIC" property="enHighPrice" />
+    <result column="EN_LOW_PRICE" jdbcType="NUMERIC" property="enLowPrice" />
+    <result column="EN_CLOSE_PRICE" jdbcType="NUMERIC" property="enClosePrice" />
+    <result column="EN_AMOUNT" jdbcType="NUMERIC" property="enAmount" />
+    <result column="EN_VOLUME" jdbcType="NUMERIC" property="enVolume" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="NUMERIC" property="lSourceId" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_PRICE_CHANGE" jdbcType="NUMERIC" property="lPriceChange" />
+    <result column="EN_PLMT" jdbcType="NUMERIC" property="enPlmt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, EN_HIGH_PRICE, 
+    EN_LOW_PRICE, EN_CLOSE_PRICE, EN_AMOUNT, EN_VOLUME, D_UPDATETIME, VC_DATA_SOURCE, 
+    D_SRC_UPDATETIME, L_SOURCE_ID, SRCID, L_PRICE_CHANGE, EN_PLMT
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey">
+    delete from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.DmBscEquityquoteExample">
+    delete from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE (VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, 
+      L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, 
+      EN_HIGH_PRICE, EN_LOW_PRICE, EN_CLOSE_PRICE, 
+      EN_AMOUNT, EN_VOLUME, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      SRCID, L_PRICE_CHANGE, EN_PLMT
+      )
+    values (#{vcScode,jdbcType=VARCHAR}, #{lTradeDate,jdbcType=NUMERIC}, #{vcStockCode,jdbcType=VARCHAR}, 
+      #{lMarket,jdbcType=NUMERIC}, #{enLastPrice,jdbcType=NUMERIC}, #{enOpenPrice,jdbcType=NUMERIC}, 
+      #{enHighPrice,jdbcType=NUMERIC}, #{enLowPrice,jdbcType=NUMERIC}, #{enClosePrice,jdbcType=NUMERIC}, 
+      #{enAmount,jdbcType=NUMERIC}, #{enVolume,jdbcType=NUMERIC}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=NUMERIC}, 
+      #{srcid,jdbcType=VARCHAR}, #{lPriceChange,jdbcType=NUMERIC}, #{enPlmt,jdbcType=NUMERIC}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="lTradeDate != null">
+        L_TRADE_DATE,
+      </if>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE,
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE,
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE,
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE,
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE,
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT,
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE,
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="lTradeDate != null">
+        #{lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="vcStockCode != null">
+        #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        #{enPlmt,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lTradeDate != null">
+        L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcStockCode != null">
+        VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLastPrice != null">
+        EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enOpenPrice != null">
+        EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enHighPrice != null">
+        EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLowPrice != null">
+        EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enClosePrice != null">
+        EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enAmount != null">
+        EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enVolume != null">
+        EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPriceChange != null">
+        L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enPlmt != null">
+        EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    set VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{enPlmt,jdbcType=NUMERIC}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.DmBscEquityquote">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <id column="L_TRADE_DATE" jdbcType="NUMERIC" property="lTradeDate" />
+    <result column="VC_STOCK_CODE" jdbcType="VARCHAR" property="vcStockCode" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="EN_LAST_PRICE" jdbcType="NUMERIC" property="enLastPrice" />
+    <result column="EN_OPEN_PRICE" jdbcType="NUMERIC" property="enOpenPrice" />
+    <result column="EN_HIGH_PRICE" jdbcType="NUMERIC" property="enHighPrice" />
+    <result column="EN_LOW_PRICE" jdbcType="NUMERIC" property="enLowPrice" />
+    <result column="EN_CLOSE_PRICE" jdbcType="NUMERIC" property="enClosePrice" />
+    <result column="EN_AMOUNT" jdbcType="NUMERIC" property="enAmount" />
+    <result column="EN_VOLUME" jdbcType="NUMERIC" property="enVolume" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="NUMERIC" property="lSourceId" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_PRICE_CHANGE" jdbcType="NUMERIC" property="lPriceChange" />
+    <result column="EN_PLMT" jdbcType="NUMERIC" property="enPlmt" />
+    <result column="L_QUOTE_DATE" jdbcType="NUMERIC" property="lQuoteDate" />
+    <result column="C_IS_FILL" jdbcType="CHAR" property="cIsFill" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, EN_HIGH_PRICE, 
+    EN_LOW_PRICE, EN_CLOSE_PRICE, EN_AMOUNT, EN_VOLUME, D_UPDATETIME, VC_DATA_SOURCE, 
+    D_SRC_UPDATETIME, L_SOURCE_ID, SRCID, L_PRICE_CHANGE, EN_PLMT, L_QUOTE_DATE, C_IS_FILL
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey">
+    delete from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.DmBscEquityquoteExample">
+    delete from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE (VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, 
+      L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, 
+      EN_HIGH_PRICE, EN_LOW_PRICE, EN_CLOSE_PRICE, 
+      EN_AMOUNT, EN_VOLUME, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      SRCID, L_PRICE_CHANGE, EN_PLMT, 
+      L_QUOTE_DATE, C_IS_FILL)
+    values (#{vcScode,jdbcType=VARCHAR}, #{lTradeDate,jdbcType=NUMERIC}, #{vcStockCode,jdbcType=VARCHAR}, 
+      #{lMarket,jdbcType=NUMERIC}, #{enLastPrice,jdbcType=NUMERIC}, #{enOpenPrice,jdbcType=NUMERIC}, 
+      #{enHighPrice,jdbcType=NUMERIC}, #{enLowPrice,jdbcType=NUMERIC}, #{enClosePrice,jdbcType=NUMERIC}, 
+      #{enAmount,jdbcType=NUMERIC}, #{enVolume,jdbcType=NUMERIC}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=NUMERIC}, 
+      #{srcid,jdbcType=VARCHAR}, #{lPriceChange,jdbcType=NUMERIC}, #{enPlmt,jdbcType=NUMERIC}, 
+      #{lQuoteDate,jdbcType=NUMERIC}, #{cIsFill,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="lTradeDate != null">
+        L_TRADE_DATE,
+      </if>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE,
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE,
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE,
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE,
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE,
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT,
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE,
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT,
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE,
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="lTradeDate != null">
+        #{lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="vcStockCode != null">
+        #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        #{cIsFill,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lTradeDate != null">
+        L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcStockCode != null">
+        VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLastPrice != null">
+        EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enOpenPrice != null">
+        EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enHighPrice != null">
+        EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLowPrice != null">
+        EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enClosePrice != null">
+        EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enAmount != null">
+        EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enVolume != null">
+        EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPriceChange != null">
+        L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enPlmt != null">
+        EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lQuoteDate != null">
+        L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cIsFill != null">
+        C_IS_FILL = #{record.cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{record.cIsFill,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL = #{cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    set VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{cIsFill,jdbcType=CHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.DmBscEquityquote">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <id column="L_TRADE_DATE" jdbcType="NUMERIC" property="lTradeDate" />
+    <result column="VC_STOCK_CODE" jdbcType="VARCHAR" property="vcStockCode" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="EN_LAST_PRICE" jdbcType="NUMERIC" property="enLastPrice" />
+    <result column="EN_OPEN_PRICE" jdbcType="NUMERIC" property="enOpenPrice" />
+    <result column="EN_HIGH_PRICE" jdbcType="NUMERIC" property="enHighPrice" />
+    <result column="EN_LOW_PRICE" jdbcType="NUMERIC" property="enLowPrice" />
+    <result column="EN_CLOSE_PRICE" jdbcType="NUMERIC" property="enClosePrice" />
+    <result column="EN_AMOUNT" jdbcType="NUMERIC" property="enAmount" />
+    <result column="EN_VOLUME" jdbcType="NUMERIC" property="enVolume" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="NUMERIC" property="lSourceId" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_PRICE_CHANGE" jdbcType="NUMERIC" property="lPriceChange" />
+    <result column="EN_PLMT" jdbcType="NUMERIC" property="enPlmt" />
+    <result column="L_QUOTE_DATE" jdbcType="NUMERIC" property="lQuoteDate" />
+    <result column="C_IS_FILL" jdbcType="CHAR" property="cIsFill" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, EN_HIGH_PRICE, 
+    EN_LOW_PRICE, EN_CLOSE_PRICE, EN_AMOUNT, EN_VOLUME, D_UPDATETIME, VC_DATA_SOURCE, 
+    D_SRC_UPDATETIME, L_SOURCE_ID, SRCID, L_PRICE_CHANGE, EN_PLMT, L_QUOTE_DATE, C_IS_FILL
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey">
+    delete from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.DmBscEquityquoteExample">
+    delete from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE (VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, 
+      L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, 
+      EN_HIGH_PRICE, EN_LOW_PRICE, EN_CLOSE_PRICE, 
+      EN_AMOUNT, EN_VOLUME, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      SRCID, L_PRICE_CHANGE, EN_PLMT, 
+      L_QUOTE_DATE, C_IS_FILL)
+    values (#{vcScode,jdbcType=VARCHAR}, #{lTradeDate,jdbcType=NUMERIC}, #{vcStockCode,jdbcType=VARCHAR}, 
+      #{lMarket,jdbcType=NUMERIC}, #{enLastPrice,jdbcType=NUMERIC}, #{enOpenPrice,jdbcType=NUMERIC}, 
+      #{enHighPrice,jdbcType=NUMERIC}, #{enLowPrice,jdbcType=NUMERIC}, #{enClosePrice,jdbcType=NUMERIC}, 
+      #{enAmount,jdbcType=NUMERIC}, #{enVolume,jdbcType=NUMERIC}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=NUMERIC}, 
+      #{srcid,jdbcType=VARCHAR}, #{lPriceChange,jdbcType=NUMERIC}, #{enPlmt,jdbcType=NUMERIC}, 
+      #{lQuoteDate,jdbcType=NUMERIC}, #{cIsFill,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="lTradeDate != null">
+        L_TRADE_DATE,
+      </if>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE,
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE,
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE,
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE,
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE,
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT,
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE,
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT,
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE,
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="lTradeDate != null">
+        #{lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="vcStockCode != null">
+        #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        #{cIsFill,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lTradeDate != null">
+        L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcStockCode != null">
+        VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLastPrice != null">
+        EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enOpenPrice != null">
+        EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enHighPrice != null">
+        EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLowPrice != null">
+        EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enClosePrice != null">
+        EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enAmount != null">
+        EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enVolume != null">
+        EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPriceChange != null">
+        L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enPlmt != null">
+        EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lQuoteDate != null">
+        L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cIsFill != null">
+        C_IS_FILL = #{record.cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{record.lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{record.cIsFill,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      </if>
+      <if test="lQuoteDate != null">
+        L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      </if>
+      <if test="cIsFill != null">
+        C_IS_FILL = #{cIsFill,jdbcType=CHAR},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    set VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      L_QUOTE_DATE = #{lQuoteDate,jdbcType=NUMERIC},
+      C_IS_FILL = #{cIsFill,jdbcType=CHAR}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <resultMap id="BaseResultMap" type="com.fl.model.DmBscEquityquote">
+    <id column="VC_SCODE" jdbcType="VARCHAR" property="vcScode" />
+    <id column="L_TRADE_DATE" jdbcType="NUMERIC" property="lTradeDate" />
+    <result column="VC_STOCK_CODE" jdbcType="VARCHAR" property="vcStockCode" />
+    <result column="L_MARKET" jdbcType="NUMERIC" property="lMarket" />
+    <result column="EN_LAST_PRICE" jdbcType="NUMERIC" property="enLastPrice" />
+    <result column="EN_OPEN_PRICE" jdbcType="NUMERIC" property="enOpenPrice" />
+    <result column="EN_HIGH_PRICE" jdbcType="NUMERIC" property="enHighPrice" />
+    <result column="EN_LOW_PRICE" jdbcType="NUMERIC" property="enLowPrice" />
+    <result column="EN_CLOSE_PRICE" jdbcType="NUMERIC" property="enClosePrice" />
+    <result column="EN_AMOUNT" jdbcType="NUMERIC" property="enAmount" />
+    <result column="EN_VOLUME" jdbcType="NUMERIC" property="enVolume" />
+    <result column="D_UPDATETIME" jdbcType="TIMESTAMP" property="dUpdatetime" />
+    <result column="VC_DATA_SOURCE" jdbcType="VARCHAR" property="vcDataSource" />
+    <result column="D_SRC_UPDATETIME" jdbcType="TIMESTAMP" property="dSrcUpdatetime" />
+    <result column="L_SOURCE_ID" jdbcType="NUMERIC" property="lSourceId" />
+    <result column="SRCID" jdbcType="VARCHAR" property="srcid" />
+    <result column="L_PRICE_CHANGE" jdbcType="NUMERIC" property="lPriceChange" />
+    <result column="EN_PLMT" jdbcType="NUMERIC" property="enPlmt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, EN_HIGH_PRICE, 
+    EN_LOW_PRICE, EN_CLOSE_PRICE, EN_AMOUNT, EN_VOLUME, D_UPDATETIME, VC_DATA_SOURCE, 
+    D_SRC_UPDATETIME, L_SOURCE_ID, SRCID, L_PRICE_CHANGE, EN_PLMT
+  </sql>
+  <select id="selectByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fl.model.DmBscEquityquoteKey">
+    delete from DM_BSC_EQUITYQUOTE
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fl.model.DmBscEquityquoteExample">
+    delete from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE (VC_SCODE, L_TRADE_DATE, VC_STOCK_CODE, 
+      L_MARKET, EN_LAST_PRICE, EN_OPEN_PRICE, 
+      EN_HIGH_PRICE, EN_LOW_PRICE, EN_CLOSE_PRICE, 
+      EN_AMOUNT, EN_VOLUME, D_UPDATETIME, 
+      VC_DATA_SOURCE, D_SRC_UPDATETIME, L_SOURCE_ID, 
+      SRCID, L_PRICE_CHANGE, EN_PLMT
+      )
+    values (#{vcScode,jdbcType=VARCHAR}, #{lTradeDate,jdbcType=NUMERIC}, #{vcStockCode,jdbcType=VARCHAR}, 
+      #{lMarket,jdbcType=NUMERIC}, #{enLastPrice,jdbcType=NUMERIC}, #{enOpenPrice,jdbcType=NUMERIC}, 
+      #{enHighPrice,jdbcType=NUMERIC}, #{enLowPrice,jdbcType=NUMERIC}, #{enClosePrice,jdbcType=NUMERIC}, 
+      #{enAmount,jdbcType=NUMERIC}, #{enVolume,jdbcType=NUMERIC}, #{dUpdatetime,jdbcType=TIMESTAMP}, 
+      #{vcDataSource,jdbcType=VARCHAR}, #{dSrcUpdatetime,jdbcType=TIMESTAMP}, #{lSourceId,jdbcType=NUMERIC}, 
+      #{srcid,jdbcType=VARCHAR}, #{lPriceChange,jdbcType=NUMERIC}, #{enPlmt,jdbcType=NUMERIC}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fl.model.DmBscEquityquote">
+    insert into DM_BSC_EQUITYQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        VC_SCODE,
+      </if>
+      <if test="lTradeDate != null">
+        L_TRADE_DATE,
+      </if>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE,
+      </if>
+      <if test="lMarket != null">
+        L_MARKET,
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE,
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE,
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE,
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE,
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE,
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT,
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME,
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME,
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE,
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME,
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID,
+      </if>
+      <if test="srcid != null">
+        SRCID,
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE,
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vcScode != null">
+        #{vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="lTradeDate != null">
+        #{lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="vcStockCode != null">
+        #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        #{enPlmt,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fl.model.DmBscEquityquoteExample" resultType="java.lang.Long">
+    select count(*) from DM_BSC_EQUITYQUOTE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="record.vcScode != null">
+        VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lTradeDate != null">
+        L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      </if>
+      <if test="record.vcStockCode != null">
+        VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lMarket != null">
+        L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLastPrice != null">
+        EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enOpenPrice != null">
+        EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enHighPrice != null">
+        EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enLowPrice != null">
+        EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enClosePrice != null">
+        EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enAmount != null">
+        EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enVolume != null">
+        EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="record.dUpdatetime != null">
+        D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vcDataSource != null">
+        VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lSourceId != null">
+        L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.srcid != null">
+        SRCID = #{record.srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPriceChange != null">
+        L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="record.enPlmt != null">
+        EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update DM_BSC_EQUITYQUOTE
+    set VC_SCODE = #{record.vcScode,jdbcType=VARCHAR},
+      L_TRADE_DATE = #{record.lTradeDate,jdbcType=NUMERIC},
+      VC_STOCK_CODE = #{record.vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{record.lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{record.enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{record.enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{record.enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{record.enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{record.enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{record.enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{record.enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{record.dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{record.vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{record.dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{record.lSourceId,jdbcType=NUMERIC},
+      SRCID = #{record.srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{record.lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{record.enPlmt,jdbcType=NUMERIC}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    <set>
+      <if test="vcStockCode != null">
+        VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lMarket != null">
+        L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      </if>
+      <if test="enLastPrice != null">
+        EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enOpenPrice != null">
+        EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enHighPrice != null">
+        EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enLowPrice != null">
+        EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enClosePrice != null">
+        EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="enAmount != null">
+        EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="enVolume != null">
+        EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      </if>
+      <if test="dUpdatetime != null">
+        D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vcDataSource != null">
+        VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dSrcUpdatetime != null">
+        D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lSourceId != null">
+        L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      </if>
+      <if test="srcid != null">
+        SRCID = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="lPriceChange != null">
+        L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      </if>
+      <if test="enPlmt != null">
+        EN_PLMT = #{enPlmt,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fl.model.DmBscEquityquote">
+    update DM_BSC_EQUITYQUOTE
+    set VC_STOCK_CODE = #{vcStockCode,jdbcType=VARCHAR},
+      L_MARKET = #{lMarket,jdbcType=NUMERIC},
+      EN_LAST_PRICE = #{enLastPrice,jdbcType=NUMERIC},
+      EN_OPEN_PRICE = #{enOpenPrice,jdbcType=NUMERIC},
+      EN_HIGH_PRICE = #{enHighPrice,jdbcType=NUMERIC},
+      EN_LOW_PRICE = #{enLowPrice,jdbcType=NUMERIC},
+      EN_CLOSE_PRICE = #{enClosePrice,jdbcType=NUMERIC},
+      EN_AMOUNT = #{enAmount,jdbcType=NUMERIC},
+      EN_VOLUME = #{enVolume,jdbcType=NUMERIC},
+      D_UPDATETIME = #{dUpdatetime,jdbcType=TIMESTAMP},
+      VC_DATA_SOURCE = #{vcDataSource,jdbcType=VARCHAR},
+      D_SRC_UPDATETIME = #{dSrcUpdatetime,jdbcType=TIMESTAMP},
+      L_SOURCE_ID = #{lSourceId,jdbcType=NUMERIC},
+      SRCID = #{srcid,jdbcType=VARCHAR},
+      L_PRICE_CHANGE = #{lPriceChange,jdbcType=NUMERIC},
+      EN_PLMT = #{enPlmt,jdbcType=NUMERIC}
+    where VC_SCODE = #{vcScode,jdbcType=VARCHAR}
+      and L_TRADE_DATE = #{lTradeDate,jdbcType=NUMERIC}
+  </update>
+</mapper>
