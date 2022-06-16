@@ -5,6 +5,8 @@
     <!--导入属性配置-->
     <properties resource="mybatisgenerator/generator.properties"></properties>
     <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--防止生成重复代码-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
         <!-- 抑制生成注释，由于生成的注释都是英文的，可以不让它生成 -->
         <commentGenerator>
             <!-- 是否去除自动生成的注释 -->
@@ -58,7 +60,7 @@
         tableName设置为*号，可以对应所有表，此时不写domainObjectName
         -->
        <table schema="" tableName="DM_BSC_SECURITY" domainObjectName="Security"></table>
-        <table schema="" tableName="DM_BSC_EQUITYQUOTE"></table>
+<!--        <table schema="" tableName="DM_BSC_EQUITYQUOTE"></table>-->
 
 
         <!-- 有些表的字段需要指定java类型
